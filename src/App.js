@@ -6,18 +6,24 @@ import ProductListing from "./reduxProject/components/productList";
 
 function App() {
   return (
-    <div className="container">
-      <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={ProductListing} />
-          <Route exact path="/product/:productId" component={ProductDetails} />
+    <div>
+      <div className="container">
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={ProductListing} />
+            <Route
+              exact
+              path="/product/:productId"
+              component={ProductDetails}
+            />
 
-          <Route>
-            <h1>404 Page Not Found!</h1>
-          </Route>
-        </Switch>
-      </BrowserRouter>
+            <Route>
+              <h1>404 Page Not Found!</h1>
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }

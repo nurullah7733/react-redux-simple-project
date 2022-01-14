@@ -8,49 +8,45 @@ import {
 } from "../redux/actions/productActions";
 
 const ProductDetails = () => {
+  const product = useSelector((state) => state.selectedProductReducer);
   const { productId } = useParams();
   const Dispatch = useDispatch();
-  const product = useSelector((state) => state.selectedProductReducer);
-
-  const fetchProductDetails = async () => {
-    const respose = await axios
-      .get(`https://fakestoreapi.com/products/${productId}`)
-      .catch((err) => console.log("err", err.message));
-
-    Dispatch(selectedProduct(respose.data));
-    console.log(respose);
-  };
 
   useEffect(() => {
-    if (productId && productId !== "") fetchProductDetails();
+    const fetchProductDetails = async () => {
+      const respose = await axios
+        .get(`https://fakestoreapi.com/products/${productId}`)
+        .catch((err) => console.log("err", err.message));
+
+      Dispatch(selectedProduct(respose.data));
+      console.log(respose);
+    };
+    fetchProductDetails();
     return () => Dispatch(removeSelectedProduct());
-  }, []);
+  }, [Dispatch, productId]);
   return Object.keys(product).length === 0 ? (
     <h4>Loading........</h4>
   ) : (
-    <div className="col-md-4 offset-md-3">
+    <div>
       <div
         className="card border border-primary"
-        style={{ marginBottom: "10px" }}
+        style={{ marginBottom: "10px", flexDirection: "inherit" }}
       >
-        <img
-          style={{
-            width: "100%",
-            height: "75vh",
-            objectFit: "contain",
-          }}
-          className="card-img-top "
-          src={product.image}
-          alt={product.title}
-        />
+        <div>
+          <img
+            className="card-img-top "
+            src={product.image}
+            alt={product.title}
+          />
+        </div>
 
         <div className="card-body">
           <h3 className="card-title">{product.title}</h3>
           <div className="card-title">{product.description}</div>
           <h3>${product.price}</h3>
           <p className="card-text">{product.category}</p>
-          <a href="javascript.avoid()" className="btn btn-primary">
-            Go to Details
+          <a href="javascript.avoid()" className="btn btn-success">
+            Add to Card
           </a>
         </div>
       </div>
