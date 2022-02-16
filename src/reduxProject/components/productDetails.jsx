@@ -25,7 +25,7 @@ const ProductDetails = () => {
     return () => Dispatch(removeSelectedProduct());
   }, [Dispatch, productId]);
   return Object.keys(product).length === 0 ? (
-    <h4>Loading........</h4>
+    <h3>....Loading</h3>
   ) : (
     <div>
       <div
