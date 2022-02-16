@@ -5,7 +5,8 @@ const Header = () => {
   return (
     <div style={{ marginTop: "20px" }}>
       <Link to="/" style={{ textDecoration: "none" }}>
-        <h1>FakeShope API</h1>
+        <h1 className="header">FakeShope API</h1>
+
       </Link>
       <hr />
     </div>
